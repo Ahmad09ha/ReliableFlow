@@ -1,0 +1,55 @@
+name: .NET build, tests and failure-lab
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Check repository structure
+        run: python3 scripts/check_repository.py
+      - name: Restore
+        run: dotnet restore ReliableFlow.slnx
+      - name: Build
+        run: dotnet build ReliableFlow.slnx --configuration Release --no-restore
+      - name: Test
+        run: dotnet test ReliableFlow.slnx --configuration Release --no-build --logger 'console;verbosity=normal'
+      - name: Audit dependencies
+        run: dotnet list tests/ReliableFlow.Tests/ReliableFlow.Tests.csproj package --vulnerable --include-transitive --no-restore
+      - name: Pack reusable library
+        run: dotnet pack src/ReliableFlow.EntityFrameworkCore/ReliableFlow.EntityFrameworkCore.csproj --configuration Release --no-build --output ./artifacts
+      - name: Install NuGet in an independent consumer
+        shell: pwsh
+        run: ./scripts/Run-PackageSmoke.ps1
+
+  docker-end-to-end:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Build and start demo
+        run: docker compose up -d --build
+      - name: Exercise failure scenarios
+        run: python3 scripts/e2e.py
+      - name: Exercise real PostgreSQL concurrent consumers and dispatchers
+        env:
+          RF_PG_ADMIN_CONNECTION: Host=127.0.0.1;Port=15432;Database=postgres;Username=demo;Password=demo_only
+        run: dotnet run --project tests/ReliableFlow.PostgresStress -c Release
+      - name: SIGKILL ordering relay after broker confirmation and validate replay
+        run: python3 scripts/e2e_hard_crash.py
+      - name: Logs on failure
+        if: failure()
+        run: docker compose logs --no-color --tail=250
+      - name: Tear down
+        if: always()
+        run: docker compose down -v

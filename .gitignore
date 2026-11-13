@@ -1,0 +1,17 @@
+**/bin/
+**/obj/
+**/.vs/
+**/.idea/
+*.user
+*.suo
+TestResults/
+.env
+.env.*
+!.env.example
+*.log
+*.nupkg
+*.snupkg
+.local-test/
+__pycache__/
+*.pyc
+.DS_Store

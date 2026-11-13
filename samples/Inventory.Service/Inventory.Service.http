@@ -1,0 +1,13 @@
+@inventory = http://localhost:8081
+
+### API health
+GET {{inventory}}/health
+
+### Inspect current stock
+GET {{inventory}}/stock
+
+### Inspect processed order reservations
+GET {{inventory}}/reservations
+
+### Inspect durable deduplication markers
+GET {{inventory}}/inbox

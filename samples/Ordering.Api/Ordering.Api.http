@@ -1,0 +1,28 @@
+@api = http://localhost:8080
+
+### API health
+GET {{api}}/health
+
+### Create an order; automatically stages its outbox event in the same DbContext
+POST {{api}}/orders
+Content-Type: application/json
+
+{
+  "sku": "BOOK-001",
+  "quantity": 2
+}
+
+### See orders
+GET {{api}}/orders
+
+### See outbox attempts / publish status
+GET {{api}}/outbox
+
+### Simulate publisher outage
+POST {{api}}/demo/faults/publisher/down
+
+### Restore publisher
+POST {{api}}/demo/faults/publisher/up
+
+### Inject post-confirmation failure on next publish
+POST {{api}}/demo/faults/fail-after-publish-once

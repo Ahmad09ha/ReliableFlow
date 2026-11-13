@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="src/ReliableFlow.EntityFrameworkCore/ReliableFlow.EntityFrameworkCore.csproj" />
+  <Project Path="samples/Shared.Contracts/Shared.Contracts.csproj" />
+  <Project Path="samples/Ordering.Api/Ordering.Api.csproj" />
+  <Project Path="samples/Inventory.Service/Inventory.Service.csproj" />
+  <Project Path="tests/ReliableFlow.Tests/ReliableFlow.Tests.csproj" />
+  <Project Path="tests/ReliableFlow.PostgresStress/ReliableFlow.PostgresStress.csproj" />
+</Solution>

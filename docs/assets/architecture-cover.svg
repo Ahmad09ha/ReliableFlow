@@ -1,0 +1,27 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#0c1428"/>
+<text x="60" y="90" font-family="Arial,sans-serif" font-size="52" fill="#ffffff" font-weight="bold">The Exactly-Once Illusion</text>
+<text x="60" y="130" font-family="Arial,sans-serif" font-size="23" fill="#aab9d5">ReliableFlow for .NET · Transactional Outbox + Idempotent Inbox</text>
+<rect x="50" y="180" width="340" height="290" rx="18" fill="#271926" stroke="#e46c80" stroke-width="2"/>
+<text x="75" y="227" font-family="Arial" font-size="28" font-weight="bold" fill="#ff98a5">PROBLEM</text>
+<text x="75" y="275" font-family="Arial" font-size="21" fill="white">Database commits</text>
+<text x="75" y="310" font-family="Arial" font-size="21" fill="white">Application crashes</text>
+<text x="75" y="345" font-family="Arial" font-size="21" fill="white">Event never published</text>
+<text x="75" y="420" font-family="Arial" font-size="23" fill="#ff98a5">Dual-write failure</text>
+<path d="M395 330 H448" stroke="#8398c8" stroke-width="5"/><path d="M444 320 L460 330 L444 340" fill="#8398c8"/>
+<rect x="465" y="180" width="340" height="290" rx="18" fill="#09292b" stroke="#59d6b2" stroke-width="2"/>
+<text x="490" y="227" font-family="Arial" font-size="27" font-weight="bold" fill="#8cf6d0">OUTBOX</text>
+<text x="490" y="275" font-family="Arial" font-size="21" fill="white">Order + event</text>
+<text x="490" y="310" font-family="Arial" font-size="21" fill="white">One DB transaction</text>
+<text x="490" y="345" font-family="Arial" font-size="21" fill="white">Retry publish safely</text>
+<text x="490" y="420" font-family="Arial" font-size="23" fill="#8cf6d0">At-least-once delivery</text>
+<path d="M810 330 H850" stroke="#8398c8" stroke-width="5"/><path d="M846 320 L862 330 L846 340" fill="#8398c8"/>
+<rect x="870" y="180" width="285" height="290" rx="18" fill="#1c2040" stroke="#b7a0ff" stroke-width="2"/>
+<text x="894" y="227" font-family="Arial" font-size="27" font-weight="bold" fill="#c0b2ff">INBOX</text>
+<text x="894" y="275" font-family="Arial" font-size="20" fill="white">Stable MessageId</text>
+<text x="894" y="310" font-family="Arial" font-size="20" fill="white">Unique constraint</text>
+<text x="894" y="345" font-family="Arial" font-size="20" fill="white">Atomic effects</text>
+<text x="894" y="420" font-family="Arial" font-size="22" fill="#c0b2ff">No duplicate DB effect</text>
+<text x="600" y="542" font-family="Arial" font-size="27" fill="#e3e9f8" text-anchor="middle" font-weight="bold">Build systems that remain correct under retries and failures.</text>
+<text x="600" y="587" font-family="Arial" font-size="20" fill="#8d9dbf" text-anchor="middle">GitHub engineering reference · ReliableFlow for .NET</text>
+</svg>
